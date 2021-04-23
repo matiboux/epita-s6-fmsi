@@ -14,6 +14,7 @@ def is_prime(n):
   if n%3 == 0: return False
   r = int(n**0.5) 
   f = 5
+  
   while f <= r:
     if n % f == 0: return False
     if n % (f+2) == 0: return False
@@ -23,23 +24,23 @@ def is_prime(n):
 def erathosthene(n):
     
     res = [True] * n
+    res_p = []
     res[0] = False
     res[1] = False
     
     if n < 2:
         return []
 
-    for i in range(2, n):       
-        
+    for i in range(2, n):      
         if res[i]:
+            res_p.append(i)
             for j in range(i + i, n, i):
                 res[j] = False
                 
-    return res
+    return res_p
 
+table =erathosthene(1000)
+count = 0
 
-table =erathosthene(1200) 
-
-for i in range(len(table)):
-    if table[i]:
-        assert(is_prime(i))
+for n in table:
+    print(n)
