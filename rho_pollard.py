@@ -6,6 +6,11 @@ from rsa import RSA
 def f(x):
     return x * x + 1
 
+"""
+Pollard's rho algorithm
+
+@param n the RSA ciphering modulus
+"""
 def rho_pollard(n):
     x = 2
     y = 2
@@ -25,7 +30,6 @@ def crack_primes(n):
     p = rho_pollard(n)
 
     if p == -1:
-        print("Could not crack message with Rho Pollard")
         return None
 
     q = n // p
@@ -35,17 +39,23 @@ def crack_msg(msg, n):
     primes = crack_primes(n)
 
     if not primes:
+        print("Could not crack message with Pollard's rho algorithm")
         return None
 
-    p, q = primes
+    (p, q) = primes
     r = RSA.generate(p, q)
 
     return r.decrypt(msg)
 
 if __name__ == "__main__":
+    original_msg = "Hello, world! This is my very secret message."
+    print("Encrypting:", original_msg)
+
     r = RSA.generate(661, 673)
+    encrypted_msg = r.encrypt(original_msg)
+    # print("Encrypted data:", encrypted_msg)
 
-    msg_enc = r.encrypt("426916")
-    msg_dec = crack_msg(msg_enc, r.n)
-
-    print(msg_dec)
+    print(10 * '*', "Cracking with Pollard's rho algorithm", 10 * '*')
+    cracked_msg = crack_msg(encrypted_msg, r.n)
+    print("Got:", cracked_msg)
+    print("Success!" if cracked_msg == original_msg else "Failure.")

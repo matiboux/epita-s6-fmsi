@@ -6,7 +6,7 @@ Este es un archivo temporal.
 """
 
 import math
-import rsa
+from rsa import RSA
 
 """
 Pollard's p-1 algorithm
@@ -37,6 +37,7 @@ def crack_primes(n):
         
         if (i > 2 ** 16):
             return None
+
     p = r
     q = n // r
     return (p, q)
@@ -45,11 +46,11 @@ def crack_msg(msg, n):
     primes = crack_primes(n)
     
     if primes == None:
-        print("Could not crack message")
+        print("Could not crack message with Pollard's p-1 algorithm")
         return None
     
     (p, q) = primes
-    r = rsa.RSA.generate(p, q)
+    r = RSA.generate(p, q)
     
     return r.decrypt(msg)
 
@@ -57,11 +58,11 @@ if __name__ == "__main__":
     original_msg = "Hello, world! This is my very secret message."
     print("Encrypting:", original_msg)
 
-    r = rsa.RSA.generate(661, 673)
+    r = RSA.generate(661, 673)
     encrypted_msg = r.encrypt(original_msg)
     # print("Encrypted data:", encrypted_msg)
 
-    print(10 * '*', "Cracking", 10 * '*')
+    print(10 * '*', "Cracking with Pollard's p-1 algorithm", 10 * '*')
     cracked_msg = crack_msg(encrypted_msg, r.n)
     print("Got:", cracked_msg)
     print("Success!" if cracked_msg == original_msg else "Failure.")
