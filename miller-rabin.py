@@ -46,9 +46,15 @@ def MillerRabin(p, limit = 40):
 
 def generate_prime(bit):
     n = random.randint(2**(bit-1), 2**bit)
+    s = bit
     
-    while not MillerRabin(n, 40):
-         n = random.randint(2**(bit-1), 2**bit)
+    while not MillerRabin(n):
+        
+        for i in range(2, s, 2):
+            if (MillerRabin(n + i)):
+                return n + i
+         #si l'incrément rate on génère un nouveau nombre    
+        n = random.randint(2**(bit-1), 2**bit)
     
     return n
 
