@@ -21,19 +21,31 @@ def rho_pollard(n):
     else:
         return p
 
+def crack_primes(n):
+    p = rho_pollard(n)
+
+    if p == -1:
+        print("Could not crack message with Rho Pollard")
+        return None
+
+    q = n // p
+    return (p, q)
+
+def crack_msg(msg, pub_key):
+    primes = crack_primes(pub_key[0])
+
+    if not primes:
+        return None
+
+    p, q = primes
+    r = RSA.generate(p, q)
+
+    return r.decrypt(msg)
+
 if __name__ == "__main__":
     r = RSA.generate(661, 673)
-    print(r.pub_key)
-    print(r.priv_key)
-
-    n = r.pub_key[0]
-
-    p = rho_pollard(n)
-    q = n // p
-    r_cracked = RSA.generate(p, q)
 
     msg_enc = r.encrypt(426916)
-    msg_dec = r_cracked.decrypt(msg_enc)
+    msg_dec = crack_msg(msg_enc, r.pub_key)
 
     print(msg_dec)
-
