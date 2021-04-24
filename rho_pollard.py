@@ -31,8 +31,8 @@ def crack_primes(n):
     q = n // p
     return (p, q)
 
-def crack_msg(msg, pub_key):
-    primes = crack_primes(pub_key[0])
+def crack_msg(msg, n):
+    primes = crack_primes(n)
 
     if not primes:
         return None
@@ -45,7 +45,7 @@ def crack_msg(msg, pub_key):
 if __name__ == "__main__":
     r = RSA.generate(661, 673)
 
-    msg_enc = r.encrypt(426916)
-    msg_dec = crack_msg(msg_enc, r.pub_key)
+    msg_enc = r.encrypt("426916")
+    msg_dec = crack_msg(msg_enc, r.n)
 
     print(msg_dec)
