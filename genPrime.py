@@ -33,7 +33,9 @@ def erathosthene(n):
     if n < 2:
         return []
 
+    res_p.append(2)
     i = 3
+
     while i * i <= n:
         if res[i]:
             res_p.append(i)
@@ -41,9 +43,13 @@ def erathosthene(n):
                 res[j] = False
         i += 1
 
+    for j in range(i, n):
+        if res[j]:
+            res_p.append(j)
+
     return res_p
 
-table =erathosthene(100000)
+table =erathosthene(1000)
 count = 0
 
 for n in table:
