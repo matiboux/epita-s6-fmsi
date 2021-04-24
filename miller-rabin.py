@@ -44,9 +44,14 @@ def MillerRabin(p, limit = 40):
     
     return True
 
-if __name__ == "__main__":
-    p = 7027512885733530016359556978643093231582954207841332111905808642699557153626390237775609216963153402372191506145964908096508381886619583684719784160767227108414535388896003633023991038274164443178033663767963330924673697484404710797497413899890903302350063
+def generate_prime(bit):
+    n = random.randint(2**(bit-1), 2**bit)
     
-    print(MillerRabin(p))
-    print(MillerRabin(7*p))
-    print(MillerRabin(3*p))
+    while not MillerRabin(n, 40):
+         n = random.randint(2**(bit-1), 2**bit)
+    
+    return n
+
+if __name__ == "__main__":
+    p = generate_prime(1024)    
+    print(p)
