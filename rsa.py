@@ -16,9 +16,9 @@ class RSA:
 	@param priv_key the private key
 	"""
 	def __init__(self, pub_key, priv_key = None):
-		assert(type(pub_key) is tuple)
+		assert(isinstance(pub_key, tuple))
 		if priv_key:
-			assert(type(pub_key) is tuple)
+			assert(isinstance(pub_key, tuple))
 			assert(pub_key[0] == priv_key[0])
 
 		self.n = pub_key[0]
@@ -38,22 +38,52 @@ class RSA:
 		return (self.n, self.d)
 
 	"""
-	Encrypt a message using the public key
+	Encrypt an integer using the public key
 
-	@param m integer encoding of the message
+	@param m integer
 	"""
-	def encrypt(self, m):
+	def encrypt_int(self, m):
 		# (m ** e) % n
 		return pow(m, self.e, self.n)
 
 	"""
-	Decrypt a message using the private key
+	Encrypt a message using the public key
 
-	@param m integer encoding of the encrypted message
+	@param m the message
 	"""
-	def decrypt(self, m):
+	def encrypt(self, m, encoding = "utf-8"):
+		# Convert the string into an array of bytes
+		bstr = bytes(m, encoding)
+		
+		# Encrypt each byte of the string individually
+		E = []
+		for c in bstr:
+			E.append(self.encrypt_int(c))
+		
+		return E
+
+	"""
+	Decrypt an integer using the private key
+
+	@param m encrypted integer
+	"""
+	def decrypt_int(self, m):
 		# (m ** d) % n
 		return pow(m, self.d, self.n)
+
+	"""
+	Decrypt an array of integers using the private key
+
+	@param m an array of encrypted integers
+	"""
+	def decrypt(self, m, encoding = "utf-8"):
+		s = ""
+		for v in m:
+			# Decrypt each integer
+			c = self.decrypt_int(v)
+			s += chr(c)
+		
+		return s
 
 	"""
 	Generate RSA ciphering keys and object
