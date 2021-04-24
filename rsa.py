@@ -16,8 +16,26 @@ class RSA:
 	@param priv_key the private key
 	"""
 	def __init__(self, pub_key, priv_key = None):
-		self.pub_key = pub_key
-		self.priv_key = priv_key
+		assert(type(pub_key) is tuple)
+		if priv_key:
+			assert(type(pub_key) is tuple)
+			assert(pub_key[0] == priv_key[0])
+
+		self.n = pub_key[0]
+		self.e = pub_key[1]
+		self.d = priv_key[1]
+
+	"""
+	Return the RSA public key
+	"""
+	def pub_key(self):
+		return (self.n, self.e)
+
+	"""
+	Return the RSA private key
+	"""
+	def priv_key(self):
+		return (self.n, self.d)
 
 	"""
 	Encrypt a message using the public key
@@ -26,7 +44,7 @@ class RSA:
 	"""
 	def encrypt(self, m):
 		# (m ** e) % n
-		return pow(m, self.pub_key[1], self.pub_key[0])
+		return pow(m, self.e, self.n)
 
 	"""
 	Decrypt a message using the private key
@@ -35,7 +53,7 @@ class RSA:
 	"""
 	def decrypt(self, m):
 		# (m ** d) % n
-		return pow(m, self.priv_key[1], self.priv_key[0])
+		return pow(m, self.d, self.n)
 
 	"""
 	Generate RSA ciphering keys and object
@@ -73,17 +91,17 @@ class RSA:
 			def rfind(x):
 				if predicate(x): return x
 				return rfind(x + 1)
-			
+
 			return rfind(x)
-		
+
 		# Compute the inverse of x modulo phi
 		def inverse(x, phi):
 			val = 1
 			while (x * val) % phi != 1: val += 1
 			return val
-		
+
 		# Compute the public and private exponents
 		e = findint(2, lambda x : math.gcd(x, phi) == 1)
 		d = inverse(e, phi)
-		
+
 		return ((n, e), (n, d))

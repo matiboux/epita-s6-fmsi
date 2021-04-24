@@ -35,8 +35,8 @@ def crack_primes(n):
     q = n // r
     return (p, q)
         
-def crack_msg(msg, pub_key):
-    primes = crack_primes(pub_key[0])
+def crack_msg(msg, n):
+    primes = crack_primes(n)
     
     if primes == None:
         print("Could not crack message")
@@ -67,6 +67,6 @@ if __name__ == "__main__":
     m = r.encrypt(message)
     
     print(10 *"*" + "Cracking" + 10 * "*")
-    msg = crack_msg(m, r.pub_key)
+    msg = crack_msg(m, r.n)
     print("got:", int_to_message(msg))
     print("original:", original)
