@@ -12,16 +12,10 @@ class RSA:
 	"""
 	Constructor of the RSA ciphering object
 
-	# @param n the modulus
-	# @param e the public exponent
-	# @param d the private exponent
 	# @param pub_key the public key
 	# @param priv_key the private key
 	"""
 	def __init__(self, pub_key, priv_key = None):
-		# self.n = n
-		# self.e = e
-		# self.d = d
 		self.pub_key = pub_key
 		self.priv_key = priv_key
 
