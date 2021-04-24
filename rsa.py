@@ -12,8 +12,8 @@ class RSA:
 	"""
 	Constructor of the RSA ciphering object
 
-	# @param pub_key the public key
-	# @param priv_key the private key
+	@param pub_key the public key
+	@param priv_key the private key
 	"""
 	def __init__(self, pub_key, priv_key = None):
 		self.pub_key = pub_key
@@ -25,7 +25,8 @@ class RSA:
 	@param m integer encoding of the message
 	"""
 	def encrypt(self, m):
-		return pow(m, self.pub_key[1], self.pub_key[0])  # (m ** e) % n
+		# (m ** e) % n
+		return pow(m, self.pub_key[1], self.pub_key[0])
 
 	"""
 	Decrypt a message using the private key
@@ -33,7 +34,8 @@ class RSA:
 	@param m integer encoding of the encrypted message
 	"""
 	def decrypt(self, m):
-		return pow(m, self.priv_key[1], self.priv_key[0])  # (m ** d) % n
+		# (m ** d) % n
+		return pow(m, self.priv_key[1], self.priv_key[0])
 
 	"""
 	Generate RSA ciphering keys and object
@@ -46,7 +48,9 @@ class RSA:
 	"""
 	@classmethod
 	def generate(cls, p, q):
+		# Generate RSA ciphering keys
 		(pub_key, priv_key) = cls.generate_keys(p, q)
+		# Instantiate an object
 		return cls(pub_key, priv_key)
 
 	"""
@@ -78,6 +82,8 @@ class RSA:
 			while (x * val) % phi != 1: val += 1
 			return val
 		
+		# Compute the public and private exponents
 		e = findint(2, lambda x : math.gcd(x, phi) == 1)
 		d = inverse(e, phi)
+		
 		return ((n, e), (n, d))
