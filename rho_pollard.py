@@ -1,6 +1,7 @@
 # Pollard's Rho algorithm to decrypt rsa.
 
 import math
+import time
 from rsa import RSA
 
 def f(x):
@@ -15,11 +16,15 @@ def rho_pollard(n):
     x = 2
     y = 2
     p = 1
+    start_time = time.perf_counter()
+
 
     while p == 1:
         x = f(x)
         y = f(f(y))
         p = math.gcd(abs(x - y), n)
+        if(time.perf_counter() - start_time > 2):
+            return -1
 
     if p == n:
         return -1
