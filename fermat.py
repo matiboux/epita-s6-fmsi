@@ -12,7 +12,7 @@ from rsa import RSA
 def factorisation_fermat(n):
     
     if (n % 2 == 0):
-        return - 1
+        return (-1, -1)
     
     A = math.ceil(math.sqrt(n))
     Bsq = A * A - n
