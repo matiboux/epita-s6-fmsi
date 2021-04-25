@@ -14,7 +14,7 @@ Pollard's rho algorithm
 """
 def rho_pollard(n):
     x = 2
-    y = 2
+    y = f(x)
     p = 1
     start_time = time.perf_counter()
 
