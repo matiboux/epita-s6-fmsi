@@ -22,7 +22,7 @@ def rho_pollard(n, x1 = 2):
         x = f(x) % n
         y = f(f(y)) % n
         p = math.gcd(abs(x - y), n)
-        if(time.perf_counter() - start_time > 2):
+        if(time.perf_counter() - start_time > 20):
             return -1
 
     if p == n:
