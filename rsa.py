@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 23 15:33:33 2021
-
-@author: Matiboux
-"""
-
 import math
 
 class RSA:

@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 23 16:55:53 2021
-
-@author: Bastien
-"""
-
 import math
 from rsa import RSA
 

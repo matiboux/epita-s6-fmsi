@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 23 15:38:13 2021
-
-@author: Bastien
-"""
-
 def is_prime(n):
 
     if n == 2 or n == 3: return True

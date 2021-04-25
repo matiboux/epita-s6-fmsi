@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 25 00:05:00 2021
 
-@author: Bastien
-"""
 
 import random
 
