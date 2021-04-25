@@ -6,8 +6,8 @@ import fermat as ferm
 import miller_rabin as mil
 from rsa import RSA
 import time
-def time_crack(func):
-    era = prim.erathosthene(1000)
+def time_crack(func, max_prime):
+    era = prim.erathosthene(max_prime)
     sucess = 0
     failed = 0
     time_array = []
@@ -36,8 +36,8 @@ def time_crack(func):
 
 
 if __name__ == "__main__":
-    #time_crack(rho.crack_primes)
-    #time_crack(ferm.crack_primes)
+    #time_crack(rho.crack_primes,1000)
+    #time_crack(ferm.crack_primes,1000)
     p = mil.generate_prime(32)
     q = mil.generate_prime(32)
     print("p = " + str(p) + " q = " + str(q) )
