@@ -35,7 +35,7 @@ def crack_primes(n):
         r = p_minus_one(n, i)
         i += 1
         
-        if (i > 2 ** 16):
+        if (i > 2 ** 12):
             return None
 
     p = r
