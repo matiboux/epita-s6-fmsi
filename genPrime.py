@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 def is_prime(n):
 
     if n == 2 or n == 3: return True

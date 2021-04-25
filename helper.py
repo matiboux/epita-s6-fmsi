@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Helper functions
 
 # Helper function for checking the equality of values in two tuples

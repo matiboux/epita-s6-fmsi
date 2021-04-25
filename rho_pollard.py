@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Pollard's Rho algorithm to decrypt rsa.
 
 import math

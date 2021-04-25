@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
 import random
-
 
 def MillerRabin(p, limit = 40):
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+
 import math
 from rsa import RSA
-
 
 def factorisation_fermat(n):
     
@@ -19,7 +19,6 @@ def factorisation_fermat(n):
         sq = (int) (math.sqrt(Bsq))
         
     return (A - sq, A + sq)
-
 
 def crack_primes(n):
     p,q = factorisation_fermat(n)
