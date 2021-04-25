@@ -41,7 +41,7 @@ def crack_msg(msg, n):
     if not primes:
         print("Could not crack message with  Fermat factorisation algorithm")
         return None
-    print(primes)
+
     (p, q) = primes
     r = RSA.generate(p, q)
 
