@@ -45,8 +45,8 @@ def MillerRabin(p, limit = 40):
     return True
 
 def generate_prime(bit):
-    n = random.randint(2**(bit-1), 2**bit)
-    s = bit
+    n = random.randint(2**(bit-1), 2**bit) | 1
+    s = 2 * n
     
     while not MillerRabin(n):
         
@@ -59,5 +59,5 @@ def generate_prime(bit):
     return n
 
 if __name__ == "__main__":
-    p = generate_prime(1024)    
+    p = generate_prime(64)    
     print(p)
