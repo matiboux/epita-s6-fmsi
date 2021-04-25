@@ -3,6 +3,7 @@ import numpy as np
 import genPrime as prim
 import rho_pollard as rho
 import fermat as ferm
+import miller_rabin as mil
 from rsa import RSA
 import time
 def time_pollard(func):
@@ -37,3 +38,15 @@ def time_pollard(func):
 if __name__ == "__main__":
     #time_pollard(rho.crack_primes)
     #time_pollard(ferm.crack_primes)
+    p = mil.generate_prime(32)
+    q = mil.generate_prime(32)
+    print("p = " + str(p) + " q = " + str(q) )
+    n = p*q
+    start_time = time.perf_counter()
+    cracked = ferm.crack_primes(n)
+    time_used =   round(time.perf_counter() - start_time,4)
+    p,q = cracked
+    print("p = " + str(p) + " q = " + str(q) + " --- %s seconds ---" % time_used)
+    
+
+
