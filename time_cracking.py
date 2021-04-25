@@ -6,7 +6,7 @@ import fermat as ferm
 import miller_rabin as mil
 from rsa import RSA
 import time
-def time_pollard(func):
+def time_crack(func):
     era = prim.erathosthene(1000)
     sucess = 0
     failed = 0
@@ -36,8 +36,8 @@ def time_pollard(func):
 
 
 if __name__ == "__main__":
-    #time_pollard(rho.crack_primes)
-    #time_pollard(ferm.crack_primes)
+    #time_crack(rho.crack_primes)
+    #time_crack(ferm.crack_primes)
     p = mil.generate_prime(32)
     q = mil.generate_prime(32)
     print("p = " + str(p) + " q = " + str(q) )
