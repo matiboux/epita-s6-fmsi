@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
-import numpy as np
+# import matplotlib.pyplot as plt
+# import numpy as np
 import genPrime as prim
 import rho_pollard as rho
 import fermat as ferm
