@@ -17,13 +17,16 @@ class RSA:
 	"""
 	def __init__(self, pub_key, priv_key = None):
 		assert(isinstance(pub_key, tuple))
+
+		self.n = pub_key[0]
+		self.e = pub_key[1]
+		self.d = None
+
 		if priv_key:
 			assert(isinstance(pub_key, tuple))
 			assert(pub_key[0] == priv_key[0])
 
-		self.n = pub_key[0]
-		self.e = pub_key[1]
-		self.d = priv_key[1]
+			self.d = priv_key[1]
 
 	"""
 	Return the RSA public key
@@ -52,14 +55,17 @@ class RSA:
 	@param m the message
 	"""
 	def encrypt(self, m, encoding = "utf-8"):
+		if self.e is None:
+			return None  # Not capable of encrypting
+
 		# Convert the string into an array of bytes
 		bstr = bytes(m, encoding)
-		
+
 		# Encrypt each byte of the string individually
 		E = []
 		for c in bstr:
 			E.append(self.encrypt_int(c))
-		
+
 		return E
 
 	"""
@@ -77,12 +83,15 @@ class RSA:
 	@param m an array of encrypted integers
 	"""
 	def decrypt(self, m, encoding = "utf-8"):
+		if self.d is None:
+			return None  # Not capable of decrypting
+
 		s = ""
 		for v in m:
 			# Decrypt each integer
 			c = self.decrypt_int(v)
 			s += chr(c)
-		
+
 		return s
 
 	"""
