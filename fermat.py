@@ -8,40 +8,31 @@ Created on Fri Apr 23 16:55:53 2021
 import math
 from rsa import RSA
 
-def isqrt(n):
-  x = n
-  y = (x + n // x) // 2
-  while y < x:
-    x = y
-    y = (x + n // x) // 2
-  return x
-
 
 def factorisation_fermat(n):
     
     if (n % 2 == 0):
         return - 1
     
-    A = math.ceil(isqrt(n))
-    Bsq = A*A - n
+    A = math.ceil(math.sqrt(n))
+    Bsq = A * A - n
     
-    sq = isqrt(Bsq)
+    sq = (int) (math.sqrt(Bsq))
     
     while sq * sq != Bsq:
         A = A + 1
         Bsq = A * A - n
-        sq = isqrt(Bsq)
+        sq = (int) (math.sqrt(Bsq))
         
-    return (int)(A - sq)
+    return (A - sq, A + sq)
 
 
 def crack_primes(n):
-    p = factorisation_fermat(n)
+    p,q = factorisation_fermat(n)
 
     if p == -1:
         return None
 
-    q = n // p
     return (p, q)
 
 def crack_msg(msg, n):
