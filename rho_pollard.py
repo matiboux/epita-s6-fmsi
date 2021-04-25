@@ -12,9 +12,9 @@ Pollard's rho algorithm
 
 @param n the RSA ciphering modulus
 """
-def rho_pollard(n):
-    x = 2
-    y = 2
+def rho_pollard(n, x1 = 2):
+    x = x1
+    y = f(x) % n
     p = 1
     start_time = time.perf_counter()
 
