@@ -18,10 +18,9 @@ def rho_pollard(n):
     p = 1
     start_time = time.perf_counter()
 
-
     while p == 1:
-        x = f(x)
-        y = f(f(y))
+        x = f(x) % n
+        y = f(f(y)) % n
         p = math.gcd(abs(x - y), n)
         if(time.perf_counter() - start_time > 2):
             return -1
